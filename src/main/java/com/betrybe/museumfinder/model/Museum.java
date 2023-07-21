@@ -2,6 +2,9 @@ package com.betrybe.museumfinder.model;
 
 import com.betrybe.museumfinder.model.Coordinate;
 
+/**
+ * Museum.
+ */
 public class Museum {
   Long id;
   String name;
