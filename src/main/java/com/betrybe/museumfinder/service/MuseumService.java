@@ -29,7 +29,7 @@ public class MuseumService implements MuseumServiceInterface {
   public Museum getClosestMuseum(Coordinate coordinate, Double maxDistance) {
     this.validateCoordinate(coordinate);
     return this.database.getClosestMuseum(coordinate, maxDistance).orElseThrow(
-        () -> new MuseumNotFoundException("Museum not found"));
+        MuseumNotFoundException::new);
   }
 
   @Override
@@ -41,7 +41,7 @@ public class MuseumService implements MuseumServiceInterface {
   private void validateCoordinate(Coordinate coordinate) {
     Boolean isCoordinateValid = CoordinateUtil.isCoordinateValid(coordinate);
     if (!isCoordinateValid) {
-      throw new InvalidCoordinateException("Invalid coordinate");
+      throw new InvalidCoordinateException();
     }
   }
 
