@@ -11,17 +11,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Museum controller class.
+ */
 @RestController
 @RequestMapping("/museums")
 public class MuseumController {
 
   MuseumServiceInterface museumService;
 
+  /**
+   * Constructor.
+   */
   @Autowired
   public MuseumController(MuseumServiceInterface museumService) {
     this.museumService = museumService;
   }
 
+  /**
+   * Create a Museum.
+   *
+   * @param museum Museum to be created.
+   * @return Created Museum.
+   */
   @PostMapping
   public ResponseEntity<Museum> createMuseum(@RequestBody MuseumDto museum) {
     Museum newMuseum = new Museum();
