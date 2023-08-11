@@ -1,6 +1,7 @@
 package com.betrybe.museumfinder.controller;
 
 import com.betrybe.museumfinder.dto.MuseumDto;
+import com.betrybe.museumfinder.model.Coordinate;
 import com.betrybe.museumfinder.model.Museum;
 import com.betrybe.museumfinder.service.MuseumServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Museum controller class.
@@ -46,4 +49,18 @@ public class MuseumController {
     newMuseum.setCoordinate(museum.coordinate());
     return ResponseEntity.status(HttpStatus.CREATED).body(museumService.createMuseum(newMuseum));
   }
+
+  /**
+   * Get the closest Museum.
+   *
+   * @param lat  Latitude of the user.
+   * @param lng Longitude of the user.
+   * @param maxDistKm Maximum distance in kilometers.
+   * @return Closest Museum.
+   */
+   @GetMapping("/closest")
+   public ResponseEntity<Museum> getClosetMusem(@RequestParam("lat") Double lat, @RequestParam("lng") Double lng, @RequestParam("max_dist_km") Double maxDistKm) {
+     Coordinate coordinate = new Coordinate(lat, lng);
+     return ResponseEntity.ok(museumService.getClosestMuseum(coordinate, lng));
+   }
 }
