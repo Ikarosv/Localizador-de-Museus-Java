@@ -47,6 +47,7 @@ public class MuseumController {
     newMuseum.setSubject(museum.subject());
     newMuseum.setUrl(museum.url());
     newMuseum.setCoordinate(museum.coordinate());
+
     return ResponseEntity.status(HttpStatus.CREATED).body(museumService.createMuseum(newMuseum));
   }
 
