@@ -30,11 +30,15 @@ public class MuseumService implements MuseumServiceInterface {
 
   @Override
   public Museum createMuseum(Museum museum) {
-    Boolean isCoordinateValid = CoordinateUtil.isCoordinateValid(museum.getCoordinate());
+    this.validateCoordinate(museum.getCoordinate());
+    return this.database.saveMuseum(museum);
+  }
+
+  private void validateCoordinate(Coordinate coordinate) {
+    Boolean isCoordinateValid = CoordinateUtil.isCoordinateValid(coordinate);
     if (!isCoordinateValid) {
       throw new InvalidCoordinateException("Invalid coordinate");
     }
-    return this.database.saveMuseum(museum);
   }
 
   @Override
